@@ -1,8 +1,12 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function App() {
   const [start, setStart] = useState(true);
+  useEffect(() => {
+    const fatch_data = () => {};
+    fatch_data();
+  }, []);
   return (
     <div className="App">
       <div className="h-screen bg-slate-100 ">
