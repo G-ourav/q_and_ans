@@ -6,3 +6,4 @@ module.exports = {
   },
   plugins: [],
 };
+// https://opentdb.com/api.php?amount=10
