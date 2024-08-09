@@ -57,7 +57,7 @@ function App() {
               <div className="grid gap-2 py-4  grid-cols-4">
                 {ans?.map((e, i) => {
                   return (
-                    <div className="p-5 rounded-2xl  bg-slate-500">
+                    <div onClick={() => {}} className="p-5 rounded-2xl  bg-slate-500">
                       <p>{e}</p>
                     </div>
                   );
