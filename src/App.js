@@ -1,17 +1,23 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import useGetData from "./hooks/useGetData";
+import Start from "./screen/Start";
+import Q_and_ans from "./screen/q_and_ans";
+import Result from "./screen/result";
+import Total_result from "./screen/Total_result";
 
 function App() {
   const [start, setStart] = useState(true);
   const [question, setQuestion] = useState();
-  const [ans, setAns] = useState([]);
+  const [all_ans, setAll_ans] = useState([]);
   const [question_no, setQuestion_no] = useState(0);
-  const [get_user_data, Get_error] = useGetData(`https://opentdb.com/api.php?amount=10`);
+  const [score, setScore] = useState([]);
+  const [ans_flag, setAns_flag] = useState(true);
+  const [get_user_data] = useGetData(`https://opentdb.com/api.php?amount=10`);
   useEffect(() => {
     if (get_user_data) {
       setQuestion(get_user_data?.results[question_no].question);
-      setAns([
+      setAll_ans([
         ...get_user_data?.results[question_no].incorrect_answers,
         get_user_data?.results[question_no].correct_answer,
       ]);
@@ -20,64 +26,27 @@ function App() {
   }, [get_user_data, question_no]);
   return (
     <div className="App">
-      <div className="h-screen bg-slate-100 ">
-        <div className="  flex text-center justify-center ">
-          <h1 className=" text-3xl bg-slate-300 text-blue rounded-2xl p-5 uppercase">Q and Ans</h1>
-        </div>
-
+      <div className="  bg-slate-100 ">
+        <div className="p-10 grid  gap-5 md:grid-cols-2 text-center justify-center"></div>
+        <Total_result />
         {start ? (
-          <div className="p-10  flex justify-center my-auto ">
-            <button
-              className=" bg-slate-500 rounded-xl p-5  uppercase  text-5xl"
-              onClick={() => {
-                setStart(false);
-              }}
-            >
-              start test
-            </button>
-          </div>
+          <Start setStart={setStart} />
+        ) : ans_flag ? (
+          <Result setAns_flag={setAns_flag} ans_flag={ans_flag} score={score} />
         ) : (
-          <div className="p-10  flex justify-center my-auto ">
-            <div
-              className=" p-10  bg-slate-300  rounded-2xl
-             "
-            >
-              <div className="flex gap-4 ">
-                {get_user_data?.results[question_no].difficulty === "hard" ? (
-                  <div className=" rounded-full p-5 shadow-2xl   bg-red-600 ">hard</div>
-                ) : get_user_data?.results[question_no].difficulty === "medium" ? (
-                  <div className=" rounded-full p-5 shadow-2xl bg-yellow-300 ">medium</div>
-                ) : (
-                  <div className=" rounded-full p-5 shadow-2xl bg-teal-800 ">easy</div>
-                )}
-              </div>
-              {/* quetion */}
-              <p>{question}</p>
-              {/* options */}
-              <div className="grid gap-2 py-4  grid-cols-4">
-                {ans?.map((e, i) => {
-                  return (
-                    <div onClick={() => {}} className="p-5 rounded-2xl  bg-slate-500">
-                      <p>{e}</p>
-                    </div>
-                  );
-                })}
-              </div>
-              <button
-                className=" bg-slate-500 rounded-xl p-2  uppercase  text-xl"
-                onClick={() => {
-                  console.log(question_no);
-                  setQuestion_no(question_no < 9 ? question_no + 1 : 9);
-                }}
-              >
-                next quetion
-              </button>
-            </div>
-            {/* results  */}
-            <div>
-              <h1>Results</h1>
-            </div>
-          </div>
+          <Q_and_ans
+            difficulty={get_user_data?.results[question_no].difficulty}
+            question={question}
+            setQuestion_no={setQuestion_no}
+            question_no={question_no}
+            score={score}
+            setScore={setScore}
+            setAns_flag={setAns_flag}
+            ans_flag={ans_flag}
+            all_ans={all_ans}
+            category={get_user_data?.results[question_no].category}
+            correct_answer={get_user_data?.results[question_no].correct_answer}
+          />
         )}
       </div>
     </div>
