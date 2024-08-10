@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import Option from "./option";
 
 const Q_and_ans = ({
   question,
@@ -13,18 +14,39 @@ const Q_and_ans = ({
   ans_flag,
   setAns_flag,
 }) => {
-  const ans_check = ({ e }) => {
-    setAns_flag(!ans_flag);
-    if (question_no <= 9) {
-      if (e === correct_answer) {
-        setScore([...score, 1]);
-      } else {
-        setScore([...score, 0]);
-      }
+  const [answerd, setAnswerd] = useState(true);
+  const [answerd_n, setAnswerd_n] = useState(0);
 
-      setQuestion_no(question_no + 1);
-    } else {
-      setQuestion_no(9);
+  const ans_check = () => {
+    setAns_flag(!ans_flag);
+    console.log(answerd_n - 1, all_ans[answerd_n - 1]);
+    if (answerd_n !== 0) {
+      console.log(answerd_n - 1, all_ans[answerd_n - 1]);
+      if (question_no <= 9) {
+        if (all_ans[answerd_n - 1] === correct_answer) {
+          setScore([
+            ...score,
+            {
+              user_answer: all_ans[answerd_n - 1],
+              correct_answer: correct_answer,
+              user_score: score[score?.length - 1]?.user_score + 1 || 0,
+            },
+          ]);
+        } else {
+          setScore([
+            ...score,
+            {
+              user_answer: all_ans[answerd_n - 1],
+              correct_answer: correct_answer,
+              user_score: score[score?.length - 1]?.user_score || 0,
+            },
+          ]);
+        }
+        setAnswerd_n(0);
+        setQuestion_no(question_no + 1);
+      } else {
+        setQuestion_no(9);
+      }
     }
   };
 
@@ -50,9 +72,7 @@ const Q_and_ans = ({
                 medium
               </div>
             ) : (
-              <div className=" rounded-full p-5 shadow-2xl shadow-green-950 bg-teal-200 ">
-                easy
-              </div>
+              <div className=" rounded-full p-5 shadow-2xl shadow-green-950 bg-teal-200 ">easy</div>
             )}
           </div>
         </div>
@@ -62,22 +82,32 @@ const Q_and_ans = ({
         <div className="grid gap-2 py-4  ">
           {all_ans?.map((e, i) => {
             return (
-              <div
-                onClick={() => {
-                  ans_check(e, i);
-                }}
-                className="p-5 rounded-2xl  bg-slate-500"
-              >
-                <p>{e}</p>
-              </div>
+              <Option
+                answerd_n={answerd_n}
+                setAnswerd_n={setAnswerd_n}
+                answerd={answerd}
+                setAnswerd={setAnswerd}
+                // ans_check={ans_check}
+                e={e}
+                i={i + 1}
+              />
             );
           })}
         </div>
+        <button
+          className=" bg-slate-500 rounded-xl p-2  uppercase  text-3xl"
+          onClick={() => {
+            ans_check();
+          }}
+        >
+          Submit
+        </button>
       </div>
-      {/* results  */}
+
+      {/* results 
       <div>
         <h1>Results</h1>
-      </div>
+      </div> */}
     </div>
   );
 };
