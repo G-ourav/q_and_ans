@@ -1,27 +1,33 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
+import "animate.css";
 import useGetData from "./hooks/useGetData";
 import Start from "./screen/Start";
 import Q_and_ans from "./screen/q_and_ans";
 import Result from "./screen/result";
 import Total_result from "./screen/Total_result";
+import WOW from "wowjs";
 
 function App() {
   const [start, setStart] = useState(true);
-  const [question, setQuestion] = useState();
   const [all_ans, setAll_ans] = useState([]);
+  const [question_content, setQuestion_content] = useState();
   const [question_no, setQuestion_no] = useState(0);
   const [score, setScore] = useState([]);
   const [ans_flag, setAns_flag] = useState(false);
   const [get_user_data] = useGetData(`https://opentdb.com/api.php?amount=10`);
   useEffect(() => {
+    const wow = new WOW.WOW();
+    wow.init();
+  }, []);
+  useEffect(() => {
     if (get_user_data) {
-      setQuestion(get_user_data?.results[question_no].question);
+      setQuestion_content(get_user_data?.results[question_no]);
       setAll_ans([
-        ...get_user_data?.results[question_no].incorrect_answers,
-        get_user_data?.results[question_no].correct_answer,
+        ...get_user_data?.results[question_no]?.incorrect_answers,
+        get_user_data?.results[question_no]?.correct_answer,
       ]);
-      console.log(get_user_data?.results[question_no].incorrect_answers);
+      // console.log(get_user_data?.results[question_no].incorrect_answers);
     }
   }, [get_user_data, question_no]);
   return (
@@ -35,8 +41,7 @@ function App() {
           <Result setAns_flag={setAns_flag} ans_flag={ans_flag} score={score} />
         ) : (
           <Q_and_ans
-            difficulty={get_user_data?.results[question_no].difficulty}
-            question={question}
+            question_content={question_content}
             setQuestion_no={setQuestion_no}
             question_no={question_no}
             score={score}
@@ -44,8 +49,6 @@ function App() {
             setAns_flag={setAns_flag}
             ans_flag={ans_flag}
             all_ans={all_ans}
-            category={get_user_data?.results[question_no].category}
-            correct_answer={get_user_data?.results[question_no].correct_answer}
           />
         )}
         {/* <Total_result /> */}
