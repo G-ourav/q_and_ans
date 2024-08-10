@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-// import { setalert_ } from "../redux/login_state";
 // import { useDispatch, useSelector } from "react-redux";
 
 function useGetData(url) {
@@ -10,21 +9,11 @@ function useGetData(url) {
   useEffect(() => {
     const get_user_data = async () => {
       try {
-        const res = await fetch(
-          "https://opentdb.com/api.php?amount=10"
-          // , {
-          //   method: "GET",
-          //   headers: {
-          //     "Content-Type": "application/json",
-          //   },
-          // }
-        );
-
+        const res = await fetch(url);
         if (!res.ok) {
           console.log("API is not working");
           throw new Error("Network response was not ok");
         }
-
         const get_res = await res.json();
         // const Data = JSON.stringify(get_res);
         setget_user_data(get_res);
