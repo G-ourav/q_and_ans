@@ -12,7 +12,7 @@ function App() {
   const [all_ans, setAll_ans] = useState([]);
   const [question_no, setQuestion_no] = useState(0);
   const [score, setScore] = useState([]);
-  const [ans_flag, setAns_flag] = useState(true);
+  const [ans_flag, setAns_flag] = useState(false);
   const [get_user_data] = useGetData(`https://opentdb.com/api.php?amount=10`);
   useEffect(() => {
     if (get_user_data) {
@@ -26,9 +26,9 @@ function App() {
   }, [get_user_data, question_no]);
   return (
     <div className="App">
-      <div className="  bg-slate-100 ">
+      <div className=" h-screen bg-slate-100 ">
         <div className="p-10 grid  gap-5 md:grid-cols-2 text-center justify-center"></div>
-        <Total_result />
+
         {start ? (
           <Start setStart={setStart} />
         ) : ans_flag ? (
@@ -48,6 +48,7 @@ function App() {
             correct_answer={get_user_data?.results[question_no].correct_answer}
           />
         )}
+        {/* <Total_result /> */}
       </div>
     </div>
   );
