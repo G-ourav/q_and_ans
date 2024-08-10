@@ -4,14 +4,11 @@ const Option = ({ e, i, answerd, setAnswerd, answerd_n, setAnswerd_n }) => {
   const [checked, setChecked] = useState(0);
   return (
     <div
-      //   onClick={() => {
-      //     if (answerd || answerd_n === i) {
-      //       setChecked(!checked);
-      //       setAnswerd_n(i);
-      //       setAnswerd(!answerd);
-      //     }
-      //   }}
-      className="p-5 rounded-2xl  bg-slate-500"
+      className={
+        answerd_n === i
+          ? "p-5 rounded-2xl text-white  shadow-2xl shadow-black  bg-gray-800"
+          : "p-5 rounded-2xl  shadow-2xl shadow-black  bg-gray-100"
+      }
     >
       <div class="flex">
         <input
