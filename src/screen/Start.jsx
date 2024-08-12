@@ -19,39 +19,39 @@ const Start = () => {
         </p>
         <div className=" flex flex-col pt-4 gap-3  text-left">
           <p>
-            <span className=" font-semibold">1 Start a Quiz:</span> Click on any quiz to begin
-            playing. Select an Answer:
+            <span className=" font-semibold">1 Start a Quiz:</span> Click on any
+            quiz to begin playing. Select an Answer:
           </p>
           <p>
-            <span className=" font-semibold">2 </span> Pick your answer by clicking on one of the
-            options. Submit Your{" "}
+            <span className=" font-semibold">2 </span> Pick your answer by
+            clicking on one of the options. Submit Your{" "}
           </p>
           <p>
-            <span className=" font-semibold">3 Answer:</span> Hit Submit to see if you got it right.
-            View the Result:{" "}
+            <span className=" font-semibold">3 Answer:</span> Hit Submit to see
+            if you got it right. View the Result:{" "}
           </p>
           <p>
-            <span className=" font-semibold">4 </span> Instantly see if your answer is correct or
-            incorrect. Move to the Next{" "}
+            <span className=" font-semibold">4 </span> Instantly see if your
+            answer is correct or incorrect. Move to the Next{" "}
           </p>
           <p>
-            <span className=" font-semibold">5 Question:</span> Click NEXT to go to the following
-            question. Complete the{" "}
+            <span className=" font-semibold">5 Question:</span> Click NEXT to go
+            to the following question. Complete the{" "}
           </p>
           <p>
-            <span className=" font-semibold">6 Quiz:</span> Answer all questions to view your final
-            score. Review Your{" "}
+            <span className=" font-semibold">6 Quiz:</span> Answer all questions
+            to view your final score. Review Your{" "}
           </p>
           <p>
-            <span className=" font-semibold">7 Results:</span> Go over your answers and learn from
-            the explanations.{" "}
+            <span className=" font-semibold">7 Results:</span> Go over your
+            answers and learn from the explanations.{" "}
           </p>
         </div>
 
         <form
           onSubmit={(e) => {
             e.preventDefault(); // Prevent the default form submission behavior
-            navigate("/q and ans"); // Ensure the route is correctly formatted
+            navigate("/q-and-ans"); // Ensure the route is correctly formatted
           }}
         >
           <div className="flex flex-col text-left gap-2 py-4">
