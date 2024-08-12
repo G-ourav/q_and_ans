@@ -11,18 +11,18 @@ function useGetData(url) {
       try {
         const res = await fetch(url);
         if (!res.ok) {
-          console.log("API is not working");
+          // console.log("API is not working");
           throw new Error("Network response was not ok");
         }
         const get_res = await res.json();
         // const Data = JSON.stringify(get_res);
         setget_user_data(get_res);
         // console.log(Data, get_res, res);
-        console.log(res, get_res);
+        // console.log(res, get_res);
         // dispatch(setalert_({ message_: get_res.message, status_: get_res.status }));
       } catch (error) {
         setGet_error(error);
-        console.error("An error occurred:", error);
+        // console.error("An error occurred:", error);
       }
     };
     get_user_data();
