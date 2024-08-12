@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import Option from "./option";
-import {
-  setQuestion_no,
-  setScore,
-  setAns_flag,
-} from "../redux/Q_and_ansReducer";
+import { setQuestion_no, setScore, setAns_flag } from "../redux/Q_and_ansReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -12,15 +8,16 @@ const Q_and_ans = ({}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { all_ans, question_content, question_no, score, total_no_question } =
-    useSelector((state) => state.Q_and_ans);
+  const { all_ans, question_content, question_no, score, total_no_question } = useSelector(
+    (state) => state.Q_and_ans
+  );
 
   const [answerd, setAnswerd] = useState(true);
   const [answerd_n, setAnswerd_n] = useState(0);
 
   const ans_check = () => {
-    console.log(question_no);
-    if (question_no === total_no_question) {
+    console.log(typeof total_no_question, typeof question_no);
+    if (question_no === +total_no_question) {
       navigate("/total result");
     } else {
       if (answerd_n !== 0) {
@@ -51,10 +48,10 @@ const Q_and_ans = ({}) => {
           }
           setAnswerd_n(0);
           dispatch(setQuestion_no(question_no + 1));
+          navigate("/result");
         } else {
-          dispatch(setQuestion_no(9));
+          // dispatch(setQuestion_no(9));
         }
-        navigate("/result");
       }
     }
   };
@@ -78,16 +75,12 @@ const Q_and_ans = ({}) => {
                 medium
               </div>
             ) : (
-              <div className=" rounded-full p-5 shadow-2xl shadow-green-950 bg-teal-200 ">
-                easy
-              </div>
+              <div className=" rounded-full p-5 shadow-2xl shadow-green-950 bg-teal-200 ">easy</div>
             )}
           </div>
         </div>
         {/* quetion */}
-        <p className="p-5 rounded-2xl text-white bg-gray-800">
-          {question_content?.question}
-        </p>
+        <p className="p-5 rounded-2xl text-white bg-gray-800">{question_content?.question}</p>
         {/* options */}
         <div className="grid  gap-4 py-6  ">
           {all_ans?.map((e, i) => {
