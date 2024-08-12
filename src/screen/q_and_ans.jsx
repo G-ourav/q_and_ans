@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import Option from "./option";
-import { setQuestion_no, setScore, setAns_flag } from "../redux/Q_and_ansReducer";
+import {
+  setQuestion_no,
+  setScore,
+  setAns_flag,
+} from "../redux/Q_and_ansReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -8,20 +12,17 @@ const Q_and_ans = ({}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { all_ans, question_content, question_no, score, total_no_question } = useSelector(
-    (state) => state.Q_and_ans
-  );
+  const { all_ans, question_content, question_no, score, total_no_question } =
+    useSelector((state) => state.Q_and_ans);
 
   const [answerd, setAnswerd] = useState(true);
   const [answerd_n, setAnswerd_n] = useState(0);
 
   const ans_check = () => {
-    console.log(typeof total_no_question, typeof question_no);
     if (question_no === +total_no_question) {
-      navigate("/total result");
+      navigate("/total-result");
     } else {
       if (answerd_n !== 0) {
-        // console.log(answerd_n - 1, all_ans[answerd_n - 1]);
         if (question_no < total_no_question) {
           if (all_ans[answerd_n - 1] === question_content?.correct_answer) {
             dispatch(
@@ -30,7 +31,7 @@ const Q_and_ans = ({}) => {
                 {
                   user_answer: all_ans[answerd_n - 1],
                   correct_answer: question_content?.correct_answer,
-                  user_score: score[score?.length - 1]?.user_score + 1 || 0,
+                  user_score: +1 + score[score?.length - 1]?.user_score || 1,
                 },
               ])
             );
@@ -55,7 +56,6 @@ const Q_and_ans = ({}) => {
       }
     }
   };
-  console.log(question_content);
   return (
     <div className="p-10">
       <div className="p-10  bg-slate-300  rounded-2xl">
@@ -75,17 +75,22 @@ const Q_and_ans = ({}) => {
                 medium
               </div>
             ) : (
-              <div className=" rounded-full p-5 shadow-2xl shadow-green-950 bg-teal-200 ">easy</div>
+              <div className=" rounded-full p-5 shadow-2xl shadow-green-950 bg-teal-200 ">
+                easy
+              </div>
             )}
           </div>
         </div>
         {/* quetion */}
-        <p className="p-5 rounded-2xl text-white bg-gray-800">{question_content?.question}</p>
+        <p className="p-5 rounded-2xl text-white bg-gray-800">
+          {question_content?.question}
+        </p>
         {/* options */}
         <div className="grid  gap-4 py-6  ">
           {all_ans?.map((e, i) => {
             return (
               <Option
+                key={`z${i + 2}`}
                 answerd_n={answerd_n}
                 setAnswerd_n={setAnswerd_n}
                 answerd={answerd}
