@@ -7,7 +7,7 @@ const initialState = {
   question_no: 0,
   score: [],
   ans_flag: false,
-  total_no_question: 1,
+  total_no_question: 0,
 };
 export const Q_and_ansSlice = createSlice({
   name: "Q_and_ans",
