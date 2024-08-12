@@ -13,12 +13,8 @@ import WOW from "wowjs";
 function App() {
   const dispatch = useDispatch();
 
-  const { question_no, total_no_question } = useSelector(
-    (state) => state.Q_and_ans
-  );
-  const [get_user_data] = useGetData(
-    `https://opentdb.com/api.php?amount=${total_no_question || 0}`
-  );
+  const { question_no, total_no_question } = useSelector((state) => state.Q_and_ans);
+  const [get_user_data] = useGetData(`https://opentdb.com/api.php?amount=${1 || 0}`);
 
   useEffect(() => {
     const wow = new WOW.WOW();
@@ -40,9 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        {get_user_data ? <App_stack /> : <Skeleton />}
-      </BrowserRouter>
+      <BrowserRouter>{get_user_data ? <App_stack /> : <Skeleton />}</BrowserRouter>
     </div>
   );
 }
