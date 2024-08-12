@@ -10,7 +10,7 @@ const Option = ({ e, i, answerd, setAnswerd, answerd_n, setAnswerd_n }) => {
           : "p-5 rounded-2xl  shadow-2xl shadow-black  bg-gray-100"
       }
     >
-      <div class="flex">
+      <div className="flex">
         <input
           id="checkbox"
           type="checkbox"
