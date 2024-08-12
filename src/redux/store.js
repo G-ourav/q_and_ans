@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+import Q_and_ansReducer from "./Q_and_ansReducer";
 const store = configureStore({
   reducer: {
-    global: globalReducer,
-    perquisites_annual_state: perquisites_annual_reducer,
+    Q_and_ans: Q_and_ansReducer,
   },
 });
 
