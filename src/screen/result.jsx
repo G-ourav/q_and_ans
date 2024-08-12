@@ -19,15 +19,9 @@ const Result = () => {
                 {score[score?.length - 1]?.correct_answer ===
                 score[score?.length - 1]?.user_answer ? (
                   <>
-                    <p
-                      className=" text-3xl pb-5  flex "
-                      data-wow-duration="2s"
-                      data-wow-delay="1s"
-                    >
+                    <p className=" text-3xl pb-5  flex " data-wow-duration="2s" data-wow-delay="1s">
                       Correct! 🎉
-                      <p className="  wow animate__animated animate__heartBeat  ">
-                        🤩
-                      </p>
+                      <p className="  wow animate__animated animate__heartBeat  ">🤩</p>
                     </p>
                     <p className="  py-1  flex ">
                       Your answer :
@@ -40,9 +34,7 @@ const Result = () => {
                   <>
                     <p className="text-3xl  pb-5  flex ">
                       Incorrect!
-                      <p className="  wow animate__animated animate__heartBeat  ">
-                        😧
-                      </p>
+                      <p className="  wow animate__animated animate__heartBeat  ">😧</p>
                     </p>
                     <p className="  py-1  flex ">
                       Your answer :
@@ -75,14 +67,13 @@ const Result = () => {
               {score[score?.length - 1]?.correct_answer ===
               score[score?.length - 1]?.user_answer ? (
                 <p className=" text-lg">
-                  Great job! You got it right. Keep up the good work and get
-                  ready for the next question.
+                  Great job! You got it right. Keep up the good work and get ready for the next
+                  question.
                 </p>
               ) : (
                 <p className=" text-lg">
-                  Great effort! That was close, but not quite right. Don’t
-                  worry, you’re doing great—let’s move on to the next question
-                  and keep up the good work!
+                  Great effort! That was close, but not quite right. Don’t worry, you’re doing
+                  great—let’s move on to the next question and keep up the good work!
                 </p>
               )}
             </div>
@@ -91,8 +82,7 @@ const Result = () => {
               Total Questions Served : {score?.length}{" "}
             </h1>
             <h1 className="  text-lg  text-blue  py-1 ">
-              Total Correct answer :{" "}
-              {score[score?.length - 1]?.user_score + 1 || 0}
+              Total Correct answer : {score[score?.length - 1]?.user_score || 0}
             </h1>
           </div>
           <div className=" ">
