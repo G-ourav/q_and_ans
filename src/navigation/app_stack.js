@@ -10,9 +10,9 @@ const app_stack = () => {
   return (
     <Routes>
       <Route path="/" element={<Start />} />
-      <Route path="/q and ans" element={<Q_and_ans />} />
+      <Route path="/q-and-ans" element={<Q_and_ans />} />
       <Route path="/result" element={<Result />} />
-      <Route path="/total result" element={<Total_result />} />
+      <Route path="/total-result" element={<Total_result />} />
       {/* Redirect any other path to the Start page */}
       {/* Redirect any other path to the Start page */}
       <Route path="*" element={<Navigate to="/" replace />} />
