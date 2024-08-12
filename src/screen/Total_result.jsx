@@ -6,9 +6,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Total_result = () => {
   const { score } = useSelector((state) => state.Q_and_ans);
-  console.log(score);
   const data = {
-    labels: ["Total Correct", "Total Incorrect"],
+    labels: ["Total Incorrect", "Total Correct"],
     datasets: [
       {
         label: "# of Votes",
